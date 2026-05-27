@@ -1,0 +1,124 @@
+-- PRACTICAL 3
+
+CREATE DATABASE College;
+USE College;
+
+-- FACULTY TABLE
+CREATE TABLE Faculty(
+ID INT AUTO_INCREMENT PRIMARY KEY,
+FIRSTNAME VARCHAR(100) NOT NULL,
+LASTNAME VARCHAR(100) NOT NULL,
+EMAIL VARCHAR(30) UNIQUE
+);
+
+-- DEPARTMENT TABLE
+CREATE TABLE DEPARTMENT(
+DeptID INT PRIMARY KEY,
+DeptName VARCHAR(50) NOT NULL,
+DeptLoc VARCHAR(12) NOT NULL
+);
+
+-- STUDENT TABLE
+CREATE TABLE STUDENT(
+S_ID INT AUTO_INCREMENT PRIMARY KEY,
+FIRSTNAME VARCHAR(100) NOT NULL,
+LASTNAME VARCHAR(100) NOT NULL,
+EMAIL VARCHAR(30) UNIQUE
+);
+
+-- COURSE TABLE
+CREATE TABLE COURSE(
+CourseID INT PRIMARY KEY,
+CourseName VARCHAR(100) NOT NULL,
+DeptID INT,
+FOREIGN KEY (DeptID) REFERENCES DEPARTMENT(DeptID)
+);
+
+-- INSERT STUDENT DATA
+INSERT INTO STUDENT VALUES
+(101,"ROHAN","THAKUR","rohan@gmail.com"),
+(102,"MOHAN","THAKUR","mohan@gmail.com"),
+(103,"RYAN","THAKUR","ryan@gmail.com"),
+(104,"HEMAN","THAKUR","heman@gmail.com"),
+(105,"HARMAN","THAKUR","harman@gmail.com");
+
+-- INSERT DEPARTMENT DATA
+INSERT INTO DEPARTMENT VALUES
+(1,"CSE","BLOCK A"),
+(2,"EE","BLOCK B"),
+(3,"CIVIL","BLOCK C"),
+(4,"MECHANICAL","BLOCK D");
+
+-- INSERT COURSE DATA
+INSERT INTO COURSE VALUES
+(301,"MACHINE LEARNING",1),
+(302,"OPERATING SYSTEM",1),
+(303,"DIGITAL ELECTRONICS",2),
+(304,"MATHEMATICS",2);
+
+-- VIEW TABLES
+SELECT * FROM FACULTY;
+SELECT * FROM STUDENT;
+SELECT * FROM DEPARTMENT;
+SELECT * FROM COURSE;
+SHOW TABLES;
+
+-------------------------------------------------
+-- ALTER OPERATIONS
+-------------------------------------------------
+
+-- Add new column AGE in STUDENT
+ALTER TABLE STUDENT
+ADD AGE INT;
+
+-- Add PHONE column in FACULTY
+ALTER TABLE FACULTY
+ADD PHONE VARCHAR(15);
+
+-- Modify EMAIL column length
+ALTER TABLE STUDENT
+MODIFY EMAIL VARCHAR(50);
+
+-- Rename column FIRSTNAME to FNAME
+ALTER TABLE STUDENT
+RENAME COLUMN FIRSTNAME TO FNAME;
+
+-------------------------------------------------
+-- UPDATE OPERATIONS
+-------------------------------------------------
+
+-- Update student email
+UPDATE STUDENT
+SET EMAIL = "rohan123@gmail.com"
+WHERE S_ID = 101;
+
+-- Update department location
+UPDATE DEPARTMENT
+SET DeptLoc = "BLOCK E"
+WHERE DeptID = 2;
+
+-- Update course name
+UPDATE COURSE
+SET CourseName = "ADVANCED MACHINE LEARNING"
+WHERE CourseID = 301;
+
+-------------------------------------------------
+-- DELETE OPERATIONS
+-------------------------------------------------
+
+-- Delete a student
+DELETE FROM STUDENT
+WHERE S_ID = 105;
+
+-- Delete a course
+DELETE FROM COURSE
+WHERE CourseID = 304;
+
+-------------------------------------------------
+-- CHECK FINAL DATA
+-------------------------------------------------
+
+SELECT * FROM STUDENT;
+SELECT * FROM DEPARTMENT;
+SELECT * FROM COURSE;
+SELECT * FROM FACULTY;
